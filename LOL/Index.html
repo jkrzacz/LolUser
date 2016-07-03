@@ -1,0 +1,236 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags must come first in the head; any other head content must come after these tags -->
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <h1>LOL USER</h1>
+        <div id="search-container" class="row">
+
+            <div class="col-xs-12">
+                <div class="input-group">
+                    <input id="inputUserName" type="text" class="form-control" placeholder="Nick...">
+                    <span class="input-group-addon">
+                        <select name="action" id="region">
+                            <option value="eune">EUNE</option>
+                            <option value="euw">EUW</option>
+                            <option value="na">NA</option>
+                            <option value="ru">RU</option>
+                            <option value="br">BR</option>
+                            <option value="jp">JP</option>
+                            <option value="kr">KR</option>
+                            <option value="lan">LAN</option>
+                            <option value="las">LAS</option>
+                            <option value="oce">OCE</option>
+                            <option value="tr">TR</option>
+                        </select>
+                    </span>
+                    <span class="input-group-btn">
+                        <button id="searchButton" class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                    </span>
+                </div><!-- /input-group -->
+            </div>
+
+        </div>
+
+
+        <div class="row">
+
+            <div class=" col-xs-6 col-sm-4 col-md-3" id="SeasonStats" >
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-3" id="PlayerStats">
+            </div>
+            <div class=" col-xs-6 col-sm-4 col-md-3" >
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-3" >
+            </div>
+
+        </div>
+
+
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            $(function () {
+                $("#searchButton").click(function () {
+                    var apiKeyParameters = "?api_key=024a9118-11db-4339-af39-1b9e1db3420c";
+                    var region = $("#region").val();
+                    var name = $("#inputUserName").val().toLowerCase();
+                    var url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.4/summoner/by-name/" + name + apiKeyParameters;
+                    $.ajax({
+                        method: "GET",
+                        url: url,
+                        success: function (result) {
+                            var userId = result[name].id;
+                            console.log(userId);
+                            getstatss2016(userId);
+                            getstatss2015(userId);
+                            getPlayerLeague(userId);
+                            championStats(userId);
+
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    })
+                });
+
+
+                function getPlayerLeague(userId) {
+                    var region = $("#region").val();
+                    var url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v2.5/league/by-summoner/" + userId + "/entry?api_key=024a9118-11db-4339-af39-1b9e1db3420c";
+                    console.log(url);
+                    $.ajax({
+                        method: "GET",
+                        url: url,
+                        success: function (result) {
+                            var x = result[userId][0];
+                            $("#PlayerStats").append("<h3>" + x.queue + "</h3>" + "<div>" + x.tier + " " + x.entries[0].division + " - " + x.entries[0].leaguePoints + "</div><div>" + x.name + "</div><div>Wins:" + x.entries[0].wins + "  Losses:" + x.entries[0].losses + "</div>");
+                            debugger;
+
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    })
+                }
+
+                function getstatss2016(userId) {
+                    var region = $("#region").val();
+                    var url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.3/stats/by-summoner/" + userId + "/summary?season=SEASON2016&api_key=024a9118-11db-4339-af39-1b9e1db3420c";
+                    $.ajax({
+                        method: "GET",
+                        url: url,
+                        success: function (result) {
+                            for (var i = 0; i < result.playerStatSummaries.length; i++) {
+                                if (result.playerStatSummaries[i].playerStatSummaryType === "RankedSolo5x5") {
+                                    var rs = i;
+                                    
+                                }
+                                if (result.playerStatSummaries[i].playerStatSummaryType === "RankedTeam5x5") {
+                                    var rt = i;
+                                }
+
+                            }
+                            $("#SeasonStats").append("<h2>Season 2016</h2>" + "<div><strong>RankedSolo5vs5</strong></div>" + "<div>Wins:" + result.playerStatSummaries[rs].wins + "</div><div>Loses:" + result.playerStatSummaries[rs].losses + "</div><div>TotalChampionKills:" + result.playerStatSummaries[rs].aggregatedStats.totalChampionKills + "</div><div>TotalAssists:" + result.playerStatSummaries[rs].aggregatedStats.totalAssists + "</div><div>TotalMinionKills:" + result.playerStatSummaries[rs].aggregatedStats.totalMinionKills + "</div><div>TotalTurretsKilled:" + result.playerStatSummaries[rs].aggregatedStats.totalTurretsKilled + "</div><div>TotalNeutralMinionsKilled:" + result.playerStatSummaries[rs].aggregatedStats.totalNeutralMinionsKilled + "</div>")
+                                       .append("<div><strong>RankedTeam5vs5</strong></div>" + "<div>Wins:" + result.playerStatSummaries[rt].wins + "</div><div>Loses:" + result.playerStatSummaries[rt].losses + "</div><div>TotalChampionKills:" + result.playerStatSummaries[rt].aggregatedStats.totalChampionKills + "</div><div>TotalAssists:" + result.playerStatSummaries[rt].aggregatedStats.totalAssists + "</div><div>TotalMinionKills:" + result.playerStatSummaries[rt].aggregatedStats.totalMinionKills + "</div><div>TotalTurretsKilled:" + result.playerStatSummaries[rt].aggregatedStats.totalTurretsKilled + "</div><div>TotalNeutralMinionsKilled:" + result.playerStatSummaries[rt].aggregatedStats.totalNeutralMinionsKilled + "</div>");
+                            getstatss2014(userId);
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    })
+
+                }
+                function getstatss2015(userId) {
+                    var region = $("#region").val();
+                    var url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.3/stats/by-summoner/" + userId + "/summary?season=SEASON2015&api_key=024a9118-11db-4339-af39-1b9e1db3420c";
+                    $.ajax({
+                        method: "GET",
+                        url: url,
+                        success: function (result) {
+                            for (var i = 0; i < result.playerStatSummaries.length; i++) {
+                                if (result.playerStatSummaries[i].playerStatSummaryType === "RankedSolo5x5") {
+                                    var rs = i;
+
+                                }
+                                if (result.playerStatSummaries[i].playerStatSummaryType === "RankedTeam5x5") {
+                                    var rt = i;
+                                }
+
+                            }
+                            $("#SeasonStats").append("<h2>Season 2015</h2>" + "<div><strong>RankedSolo5vs5</strong></div>" + "<div>Wins:" + result.playerStatSummaries[rs].wins + "</div><div>Loses:" + result.playerStatSummaries[rs].losses + "</div><div>TotalChampionKills:" + result.playerStatSummaries[rs].aggregatedStats.totalChampionKills + "</div><div>TotalAssists:" + result.playerStatSummaries[rs].aggregatedStats.totalAssists + "</div><div>TotalMinionKills:" + result.playerStatSummaries[rs].aggregatedStats.totalMinionKills + "</div><div>TotalTurretsKilled:" + result.playerStatSummaries[rs].aggregatedStats.totalTurretsKilled + "</div><div>TotalNeutralMinionsKilled:" + result.playerStatSummaries[rs].aggregatedStats.totalNeutralMinionsKilled + "</div>")
+                                       .append("<div><strong>RankedTeam5vs5</strong></div>" + "<div>Wins:" + result.playerStatSummaries[rt].wins + "</div><div>Loses:" + result.playerStatSummaries[rt].losses + "</div><div>TotalChampionKills:" + result.playerStatSummaries[rt].aggregatedStats.totalChampionKills + "</div><div>TotalAssists:" + result.playerStatSummaries[rt].aggregatedStats.totalAssists + "</div><div>TotalMinionKills:" + result.playerStatSummaries[rt].aggregatedStats.totalMinionKills + "</div><div>TotalTurretsKilled:" + result.playerStatSummaries[rt].aggregatedStats.totalTurretsKilled + "</div><div>TotalNeutralMinionsKilled:" + result.playerStatSummaries[rt].aggregatedStats.totalNeutralMinionsKilled + "</div>");
+                            getstatss2013(userId);
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    })
+
+                }
+                function getstatss2014(userId) {
+                    var region = $("#region").val();
+                    var url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.3/stats/by-summoner/" + userId + "/summary?season=SEASON2014&api_key=024a9118-11db-4339-af39-1b9e1db3420c";
+                    $.ajax({
+                        method: "GET",
+                        url: url,
+                        success: function (result) {
+                            for (var i = 0; i < result.playerStatSummaries.length; i++) {
+                                if (result.playerStatSummaries[i].playerStatSummaryType === "RankedSolo5x5") {
+                                    var rs = i;
+
+                                }
+                                if (result.playerStatSummaries[i].playerStatSummaryType === "RankedTeam5x5") {
+                                    var rt = i;
+                                }
+
+                            }
+                            $("#SeasonStats").append("<h2>Season 2014</h2>" + "<div><strong>RankedSolo5vs5</strong></div>" + "<div>Wins:" + result.playerStatSummaries[rs].wins + "</div><div>Loses:" + result.playerStatSummaries[rs].losses + "</div><div>TotalChampionKills:" + result.playerStatSummaries[rs].aggregatedStats.totalChampionKills + "</div><div>TotalAssists:" + result.playerStatSummaries[rs].aggregatedStats.totalAssists + "</div><div>TotalMinionKills:" + result.playerStatSummaries[rs].aggregatedStats.totalMinionKills + "</div><div>TotalTurretsKilled:" + result.playerStatSummaries[rs].aggregatedStats.totalTurretsKilled + "</div><div>TotalNeutralMinionsKilled:" + result.playerStatSummaries[rs].aggregatedStats.totalNeutralMinionsKilled + "</div>")
+                                       .append("<div><strong>RankedTeam5vs5</strong></div>" + "<div>Wins:" + result.playerStatSummaries[rt].wins + "</div><div>Loses:" + result.playerStatSummaries[rt].losses + "</div><div>TotalChampionKills:" + result.playerStatSummaries[rt].aggregatedStats.totalChampionKills + "</div><div>TotalAssists:" + result.playerStatSummaries[rt].aggregatedStats.totalAssists + "</div><div>TotalMinionKills:" + result.playerStatSummaries[rt].aggregatedStats.totalMinionKills + "</div><div>TotalTurretsKilled:" + result.playerStatSummaries[rt].aggregatedStats.totalTurretsKilled + "</div><div>TotalNeutralMinionsKilled:" + result.playerStatSummaries[rt].aggregatedStats.totalNeutralMinionsKilled + "</div>");
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    })
+
+                }
+                function getstatss2013(userId) {
+                    var region = $("#region").val();
+                    var url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.3/stats/by-summoner/" + userId + "/summary?season=SEASON3&api_key=024a9118-11db-4339-af39-1b9e1db3420c";
+                    $.ajax({
+                        method: "GET",
+                        url: url,
+                        success: function (result) {
+                            for (var i = 0; i < result.playerStatSummaries.length; i++) {
+                                if (result.playerStatSummaries[i].playerStatSummaryType === "RankedSolo5x5") {
+                                    var rs = i;
+                                }
+                                if (result.playerStatSummaries[i].playerStatSummaryType === "RankedTeam5x5") {
+                                    var rt = i;
+                                }
+
+                            }
+                            $("#SeasonStats").append("<h2>Season 2013</h2>" + "<div><strong>RankedSolo5vs5</strong></div>" + "<div>Wins:" + result.playerStatSummaries[rs].wins + "</div><div>Loses:" + result.playerStatSummaries[rs].losses + "</div><div>TotalChampionKills:" + result.playerStatSummaries[rs].aggregatedStats.totalChampionKills + "</div><div>TotalAssists:" + result.playerStatSummaries[rs].aggregatedStats.totalAssists + "</div><div>TotalMinionKills:" + result.playerStatSummaries[rs].aggregatedStats.totalMinionKills + "</div><div>TotalTurretsKilled:" + result.playerStatSummaries[rs].aggregatedStats.totalTurretsKilled + "</div><div>TotalNeutralMinionsKilled:" + result.playerStatSummaries[rs].aggregatedStats.totalNeutralMinionsKilled + "</div>")
+                                       .append("<div><strong>RankedTeam5vs5</strong></div>" + "<div>Wins:" + result.playerStatSummaries[rt].wins + "</div><div>Loses:" + result.playerStatSummaries[rt].losses + "</div><div>TotalChampionKills:" + result.playerStatSummaries[rt].aggregatedStats.totalChampionKills + "</div><div>TotalAssists:" + result.playerStatSummaries[rt].aggregatedStats.totalAssists + "</div><div>TotalMinionKills:" + result.playerStatSummaries[rt].aggregatedStats.totalMinionKills + "</div><div>TotalTurretsKilled:" + result.playerStatSummaries[rt].aggregatedStats.totalTurretsKilled + "</div><div>TotalNeutralMinionsKilled:" + result.playerStatSummaries[rt].aggregatedStats.totalNeutralMinionsKilled + "</div>");
+                        },
+                        error: function (error) {
+                            console.log(error);
+                        }
+                    })
+
+                }
+                function championStats(userId) {
+                    var region = $("#region").val();
+                    var url = "https://eune.api.pvp.net/championmastery/location/EUN1/player/24491185/champions?api_key=024a9118-11db-4339-af39-1b9e1db3420c&jsoncallback=?";
+                    $.getJSON(url, function (json) {
+                        debugger;
+                    });
+                }
+
+
+
+            });
+        </script>
+</body>
+</html>
