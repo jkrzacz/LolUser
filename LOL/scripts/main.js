@@ -59,9 +59,50 @@
                     }
 
                 }
-                $("#SeasonStats").append("<h2>Season 2016</h2>" + "<div><strong>RankedSolo5vs5</strong></div>" + "<div>Wins:" + result.playerStatSummaries[rs].wins + "</div><div>Loses:" + result.playerStatSummaries[rs].losses + "</div><div>TotalChampionKills:" + result.playerStatSummaries[rs].aggregatedStats.totalChampionKills + "</div><div>TotalAssists:" + result.playerStatSummaries[rs].aggregatedStats.totalAssists + "</div><div>TotalMinionKills:" + result.playerStatSummaries[rs].aggregatedStats.totalMinionKills + "</div><div>TotalTurretsKilled:" + result.playerStatSummaries[rs].aggregatedStats.totalTurretsKilled + "</div><div>TotalNeutralMinionsKilled:" + result.playerStatSummaries[rs].aggregatedStats.totalNeutralMinionsKilled + "</div>")
-                           .append("<div><strong>RankedTeam5vs5</strong></div>" + "<div>Wins:" + result.playerStatSummaries[rt].wins + "</div><div>Loses:" + result.playerStatSummaries[rt].losses + "</div><div>TotalChampionKills:" + result.playerStatSummaries[rt].aggregatedStats.totalChampionKills + "</div><div>TotalAssists:" + result.playerStatSummaries[rt].aggregatedStats.totalAssists + "</div><div>TotalMinionKills:" + result.playerStatSummaries[rt].aggregatedStats.totalMinionKills + "</div><div>TotalTurretsKilled:" + result.playerStatSummaries[rt].aggregatedStats.totalTurretsKilled + "</div><div>TotalNeutralMinionsKilled:" + result.playerStatSummaries[rt].aggregatedStats.totalNeutralMinionsKilled + "</div>");
-                getstatss2014(userId);
+                $("#SeasonStats2016").append("<h2>Season 2016</h2>" + "<div><strong>RankedSolo5vs5</strong></div>" + "<div>Wins:");
+                if (!result.playerStatSummaries[rs].wins) { $("#SeasonStats2016").append("0"); }
+                else { $("#SeasonStats2016").append(result.playerStatSummaries[rs].wins); }
+                $("#SeasonStats2016").append("</div><div>Loses:");
+                if (!result.playerStatSummaries[rs].losses) { $("#SeasonStats2016").append("0"); }
+                else { $("#SeasonStats2016").append(result.playerStatSummaries[rs].losses); }
+                $("#SeasonStats2016").append("</div><div>TotalChampionKills:");
+                if (!result.playerStatSummaries[rs].aggregatedStats.totalChampionKills) { $("#SeasonStats2016").append("0"); }
+                else { $("#SeasonStats2016").append(result.playerStatSummaries[rs].aggregatedStats.totalChampionKills); }
+                $("#SeasonStats2016").append("</div><div>TotalAssists:");
+                if (!result.playerStatSummaries[rs].aggregatedStats.totalAssists) { $("#SeasonStats2016").append("0"); }
+                else { $("#SeasonStats2016").append(result.playerStatSummaries[rs].aggregatedStats.totalAssists); }
+                $("#SeasonStats2016").append("</div><div>TotalMinionKills:");
+                if (!result.playerStatSummaries[rs].aggregatedStats.totalMinionKills) { $("#SeasonStats2016").append("0"); }
+                else { $("#SeasonStats2016").append(result.playerStatSummaries[rs].aggregatedStats.totalMinionKills); }
+                $("#SeasonStats2016").append("</div><div>TotalTurretsKilled:");
+                if (!result.playerStatSummaries[rs].aggregatedStats.totalTurretsKilled) { $("#SeasonStats2016").append("0"); }
+                else { $("#SeasonStats2016").append(result.playerStatSummaries[rs].aggregatedStats.totalTurretsKilled); }
+                $("#SeasonStats2016").append("</div><div>TotalNeutralMinionsKilled:");
+                if (!result.playerStatSummaries[rs].aggregatedStats.totalNeutralMinionsKilled) { $("#SeasonStats2016").append("0"); }
+                else { $("#SeasonStats2016").append(result.playerStatSummaries[rs].aggregatedStats.totalNeutralMinionsKilled); }
+                    $("#SeasonStats2016").append("</div><div><strong>RankedTeam5vs5</strong></div><div>Wins:");
+                    if (!result.playerStatSummaries[rt].wins) { $("#SeasonStats2016").append("0"); }
+                    else { $("#SeasonStats2016").append(result.playerStatSummaries[rt].wins); }
+                    $("#SeasonStats2016").append("</div><div>Loses:");
+                    if (!result.playerStatSummaries[rt].losses) { $("#SeasonStats2016").append("0"); }
+                    else { $("#SeasonStats2016").append(result.playerStatSummaries[rt].losses); }
+                    $("#SeasonStats2016").append("</div><div>TotalChampionKills:");
+                    if (!result.playerStatSummaries[rt].aggregatedStats.totalChampionKills) { $("#SeasonStats2016").append("0"); }
+                    else { $("#SeasonStats2016").append(result.playerStatSummaries[rt].aggregatedStats.totalChampionKills); }
+                    $("#SeasonStats2016").append("</div><div>TotalAssists:");
+                    if (!result.playerStatSummaries[rt].aggregatedStats.totalAssists) { $("#SeasonStats2016").append("0"); }
+                    else { $("#SeasonStats2016").append(result.playerStatSummaries[rt].aggregatedStats.totalAssists); }
+                    $("#SeasonStats2016").append("</div><div>TotalMinionKills:");
+                    if (!result.playerStatSummaries[rt].aggregatedStats.totalMinionKills) { $("#SeasonStats2016").append("0"); }
+                    else { $("#SeasonStats2016").append(result.playerStatSummaries[rt].aggregatedStats.totalMinionKills); }
+                    $("#SeasonStats2016").append("</div><div>TotalTurretsKilled:");
+                    if (!result.playerStatSummaries[rt].aggregatedStats.totalTurretsKilled) { $("#SeasonStats2016").append("0"); }
+                    else { $("#SeasonStats2016").append(result.playerStatSummaries[rt].aggregatedStats.totalTurretsKilled); }
+                    $("#SeasonStats2016").append("</div><div>TotalNeutralMinionsKilled:");
+                    if (!result.playerStatSummaries[rt].aggregatedStats.totalNeutralMinionsKilled) { $("#SeasonStats2016").append("0"); }
+                    else { $("#SeasonStats2016").append(result.playerStatSummaries[rt].aggregatedStats.totalNeutralMinionsKilled); }
+                    $("#SeasonStats2016").append("</div>");
+                    getstatss2014(userId);
             },
             error: function (error) {
                 console.log(error);
@@ -86,9 +127,50 @@
                     }
 
                 }
-                $("#SeasonStats").append("<h2>Season 2015</h2>" + "<div><strong>RankedSolo5vs5</strong></div>" + "<div>Wins:" + result.playerStatSummaries[rs].wins + "</div><div>Loses:" + result.playerStatSummaries[rs].losses + "</div><div>TotalChampionKills:" + result.playerStatSummaries[rs].aggregatedStats.totalChampionKills + "</div><div>TotalAssists:" + result.playerStatSummaries[rs].aggregatedStats.totalAssists + "</div><div>TotalMinionKills:" + result.playerStatSummaries[rs].aggregatedStats.totalMinionKills + "</div><div>TotalTurretsKilled:" + result.playerStatSummaries[rs].aggregatedStats.totalTurretsKilled + "</div><div>TotalNeutralMinionsKilled:" + result.playerStatSummaries[rs].aggregatedStats.totalNeutralMinionsKilled + "</div>")
-                           .append("<div><strong>RankedTeam5vs5</strong></div>" + "<div>Wins:" + result.playerStatSummaries[rt].wins + "</div><div>Loses:" + result.playerStatSummaries[rt].losses + "</div><div>TotalChampionKills:" + result.playerStatSummaries[rt].aggregatedStats.totalChampionKills + "</div><div>TotalAssists:" + result.playerStatSummaries[rt].aggregatedStats.totalAssists + "</div><div>TotalMinionKills:" + result.playerStatSummaries[rt].aggregatedStats.totalMinionKills + "</div><div>TotalTurretsKilled:" + result.playerStatSummaries[rt].aggregatedStats.totalTurretsKilled + "</div><div>TotalNeutralMinionsKilled:" + result.playerStatSummaries[rt].aggregatedStats.totalNeutralMinionsKilled + "</div>");
-                getstatss2013(userId);
+                $("#SeasonStats2015").append("<h2>Season 2015</h2>" + "<div><strong>RankedSolo5vs5</strong></div><div>Wins:");
+                if (!result.playerStatSummaries[rs].wins) { $("#SeasonStats2015").append("0"); }
+                else { $("#SeasonStats2015").append(result.playerStatSummaries[rs].wins); }
+                $("#SeasonStats2015").append("</div><div>Loses:");
+                if (!result.playerStatSummaries[rs].losses) { $("#SeasonStats2015").append("0"); }
+                else { $("#SeasonStats2015").append(result.playerStatSummaries[rs].losses); }
+                $("#SeasonStats2015").append("</div><div>TotalChampionKills:");
+                if (!result.playerStatSummaries[rs].aggregatedStats.totalChampionKills) { $("#SeasonStats2015").append("0"); }
+                else { $("#SeasonStats2015").append(result.playerStatSummaries[rs].aggregatedStats.totalChampionKills); }
+                $("#SeasonStats2015").append("</div><div>TotalAssists:");
+                if (!result.playerStatSummaries[rs].aggregatedStats.totalAssists) { $("#SeasonStats2015").append("0"); }
+                else { $("#SeasonStats2015").append(result.playerStatSummaries[rs].aggregatedStats.totalAssists); }
+                $("#SeasonStats2015").append("</div><div>TotalMinionKills:");
+                if (!result.playerStatSummaries[rs].aggregatedStats.totalMinionKills) { $("#SeasonStats2015").append("0"); }
+                else { $("#SeasonStats2015").append(result.playerStatSummaries[rs].aggregatedStats.totalMinionKills); }
+                $("#SeasonStats2015").append("</div><div>TotalTurretsKilled:");
+                if (!result.playerStatSummaries[rs].aggregatedStats.totalTurretsKilled) { $("#SeasonStats2015").append("0"); }
+                else { $("#SeasonStats2015").append(result.playerStatSummaries[rs].aggregatedStats.totalTurretsKilled); }
+                $("#SeasonStats2015").append("</div><div>TotalNeutralMinionsKilled:");
+                if (!result.playerStatSummaries[rs].aggregatedStats.totalNeutralMinionsKilled) { $("#SeasonStats2015").append("0"); }
+                else { $("#SeasonStats2015").append(result.playerStatSummaries[rs].aggregatedStats.totalNeutralMinionsKilled); }
+                    $("#SeasonStats2015").append("</div><div><strong>RankedTeam5vs5</strong></div><div>Wins:");
+                    if (!result.playerStatSummaries[rt].wins) { $("#SeasonStats2015").append("0"); }
+                    else { $("#SeasonStats2015").append(result.playerStatSummaries[rt].wins); }
+                    $("#SeasonStats2015").append("</div><div>Loses:");
+                    if (!result.playerStatSummaries[rt].losses) { $("#SeasonStats2015").append("0"); }
+                    else { $("#SeasonStats2015").append(result.playerStatSummaries[rt].losses); }
+                    $("#SeasonStats2015").append("</div><div>TotalChampionKills:");
+                    if (!result.playerStatSummaries[rt].aggregatedStats.totalChampionKills) { $("#SeasonStats2015").append("0"); }
+                    else { $("#SeasonStats2015").append(result.playerStatSummaries[rt].aggregatedStats.totalChampionKills); }
+                    $("#SeasonStats2015").append("</div><div>TotalAssists:");
+                    if (!result.playerStatSummaries[rt].aggregatedStats.totalAssists) { $("#SeasonStats2015").append("0"); }
+                    else { $("#SeasonStats2015").append(result.playerStatSummaries[rt].aggregatedStats.totalAssists); }
+                    $("#SeasonStats2015").append("</div><div>TotalMinionKills:");
+                    if (!result.playerStatSummaries[rt].aggregatedStats.totalMinionKills) { $("#SeasonStats2015").append("0"); }
+                    else { $("#SeasonStats2015").append(result.playerStatSummaries[rt].aggregatedStats.totalMinionKills); }
+                    $("#SeasonStats2015").append("</div><div>TotalTurretsKilled:");
+                    if (!result.playerStatSummaries[rt].aggregatedStats.totalTurretsKilled) { $("#SeasonStats2015").append("0"); }
+                    else { $("#SeasonStats2015").append(result.playerStatSummaries[rt].aggregatedStats.totalTurretsKilled); }
+                    $("#SeasonStats2015").append("</div><div>TotalNeutralMinionsKilled:");
+                    if (!result.playerStatSummaries[rt].aggregatedStats.totalNeutralMinionsKilled) { $("#SeasonStats2015").append("0"); }
+                    else { $("#SeasonStats2015").append(result.playerStatSummaries[rt].aggregatedStats.totalNeutralMinionsKilled); }
+                    $("#SeasonStats2015").append("</div>");
+                    getstatss2013(userId);
             },
             error: function (error) {
                 console.log(error);
@@ -113,8 +195,49 @@
                     }
 
                 }
-                $("#SeasonStats").append("<h2>Season 2014</h2>" + "<div><strong>RankedSolo5vs5</strong></div>" + "<div>Wins:" + result.playerStatSummaries[rs].wins + "</div><div>Loses:" + result.playerStatSummaries[rs].losses + "</div><div>TotalChampionKills:" + result.playerStatSummaries[rs].aggregatedStats.totalChampionKills + "</div><div>TotalAssists:" + result.playerStatSummaries[rs].aggregatedStats.totalAssists + "</div><div>TotalMinionKills:" + result.playerStatSummaries[rs].aggregatedStats.totalMinionKills + "</div><div>TotalTurretsKilled:" + result.playerStatSummaries[rs].aggregatedStats.totalTurretsKilled + "</div><div>TotalNeutralMinionsKilled:" + result.playerStatSummaries[rs].aggregatedStats.totalNeutralMinionsKilled + "</div>")
-                           .append("<div><strong>RankedTeam5vs5</strong></div>" + "<div>Wins:" + result.playerStatSummaries[rt].wins + "</div><div>Loses:" + result.playerStatSummaries[rt].losses + "</div><div>TotalChampionKills:" + result.playerStatSummaries[rt].aggregatedStats.totalChampionKills + "</div><div>TotalAssists:" + result.playerStatSummaries[rt].aggregatedStats.totalAssists + "</div><div>TotalMinionKills:" + result.playerStatSummaries[rt].aggregatedStats.totalMinionKills + "</div><div>TotalTurretsKilled:" + result.playerStatSummaries[rt].aggregatedStats.totalTurretsKilled + "</div><div>TotalNeutralMinionsKilled:" + result.playerStatSummaries[rt].aggregatedStats.totalNeutralMinionsKilled + "</div>");
+                $("#SeasonStats2014").append("<h2>Season 2014</h2>" + "</div><div><strong>RankedTeam5vs5</strong></div><div>Wins:");
+                if (!result.playerStatSummaries[rs].wins) { $("#SeasonStats2014").append("0"); }
+                else { $("#SeasonStats2014").append(result.playerStatSummaries[rs].wins); }
+                $("#SeasonStats2014").append("</div><div>Loses:");
+                if (!result.playerStatSummaries[rs].losses) { $("#SeasonStats2014").append("0"); }
+                else { $("#SeasonStats2014").append(result.playerStatSummaries[rs].losses); }
+                $("#SeasonStats2014").append("</div><div>TotalChampionKills:");
+                if (!result.playerStatSummaries[rs].aggregatedStats.totalChampionKills) { $("#SeasonStats2014").append("0"); }
+                else { $("#SeasonStats2014").append(result.playerStatSummaries[rs].aggregatedStats.totalChampionKills); }
+                $("#SeasonStats2014").append("</div><div>TotalAssists:");
+                if (!result.playerStatSummaries[rs].aggregatedStats.totalAssists) { $("#SeasonStats2014").append("0"); }
+                else { $("#SeasonStats2014").append(result.playerStatSummaries[rs].aggregatedStats.totalAssists); }
+                $("#SeasonStats2014").append("</div><div>TotalMinionKills:");
+                if (!result.playerStatSummaries[rs].aggregatedStats.totalMinionKills) { $("#SeasonStats2014").append("0"); }
+                else { $("#SeasonStats2014").append(result.playerStatSummaries[rs].aggregatedStats.totalMinionKills); }
+                $("#SeasonStats2014").append("</div><div>TotalTurretsKilled:");
+                if (!result.playerStatSummaries[rs].aggregatedStats.totalTurretsKilled) { $("#SeasonStats2014").append("0"); }
+                else { $("#SeasonStats2014").append(result.playerStatSummaries[rs].aggregatedStats.totalTurretsKilled); }
+                $("#SeasonStats2014").append("</div><div>TotalNeutralMinionsKilled:");
+                if (!result.playerStatSummaries[rs].aggregatedStats.totalNeutralMinionsKilled) { $("#SeasonStats2014").append("0"); }
+                else { $("#SeasonStats2014").append(result.playerStatSummaries[rs].aggregatedStats.totalNeutralMinionsKilled); }
+                    $("#SeasonStats2014").append("</div><div><strong>RankedTeam5vs5</strong></div><div>Wins:");
+                    if (!result.playerStatSummaries[rt].wins) { $("#SeasonStats2014").append("0"); }
+                    else { $("#SeasonStats2014").append(result.playerStatSummaries[rt].wins); }
+                    $("#SeasonStats2014").append("</div><div>Loses:");
+                    if (!result.playerStatSummaries[rt].losses) { $("#SeasonStats2014").append("0"); }
+                    else { $("#SeasonStats2014").append(result.playerStatSummaries[rt].losses); }
+                    $("#SeasonStats2014").append("</div><div>TotalChampionKills:");
+                    if (!result.playerStatSummaries[rt].aggregatedStats.totalChampionKills) { $("#SeasonStats2014").append("0"); }
+                    else { $("#SeasonStats2014").append(result.playerStatSummaries[rt].aggregatedStats.totalChampionKills); }
+                    $("#SeasonStats2014").append("</div><div>TotalAssists:");
+                    if (!result.playerStatSummaries[rt].aggregatedStats.totalAssists) { $("#SeasonStats2014").append("0"); }
+                    else { $("#SeasonStats2014").append(result.playerStatSummaries[rt].aggregatedStats.totalAssists); }
+                    $("#SeasonStats2014").append("</div><div>TotalMinionKills:");
+                    if (!result.playerStatSummaries[rt].aggregatedStats.totalMinionKills) { $("#SeasonStats2014").append("0"); }
+                    else { $("#SeasonStats2014").append(result.playerStatSummaries[rt].aggregatedStats.totalMinionKills); }
+                    $("#SeasonStats2014").append("</div><div>TotalTurretsKilled:");
+                    if (!result.playerStatSummaries[rt].aggregatedStats.totalTurretsKilled) { $("#SeasonStats2014").append("0"); }
+                    else { $("#SeasonStats2014").append(result.playerStatSummaries[rt].aggregatedStats.totalTurretsKilled); }
+                    $("#SeasonStats2014").append("</div><div>TotalNeutralMinionsKilled:");
+                    if (!result.playerStatSummaries[rt].aggregatedStats.totalNeutralMinionsKilled) { $("#SeasonStats2014").append("0"); }
+                    else { $("#SeasonStats2014").append(result.playerStatSummaries[rt].aggregatedStats.totalNeutralMinionsKilled); }
+                    $("#SeasonStats2014").append("</div>");
             },
             error: function (error) {
                 console.log(error);
@@ -138,8 +261,49 @@
                     }
 
                 }
-                $("#SeasonStats").append("<h2>Season 2013</h2>" + "<div><strong>RankedSolo5vs5</strong></div>" + "<div>Wins:" + result.playerStatSummaries[rs].wins + "</div><div>Loses:" + result.playerStatSummaries[rs].losses + "</div><div>TotalChampionKills:" + result.playerStatSummaries[rs].aggregatedStats.totalChampionKills + "</div><div>TotalAssists:" + result.playerStatSummaries[rs].aggregatedStats.totalAssists + "</div><div>TotalMinionKills:" + result.playerStatSummaries[rs].aggregatedStats.totalMinionKills + "</div><div>TotalTurretsKilled:" + result.playerStatSummaries[rs].aggregatedStats.totalTurretsKilled + "</div><div>TotalNeutralMinionsKilled:" + result.playerStatSummaries[rs].aggregatedStats.totalNeutralMinionsKilled + "</div>")
-                           .append("<div><strong>RankedTeam5vs5</strong></div>" + "<div>Wins:" + result.playerStatSummaries[rt].wins + "</div><div>Loses:" + result.playerStatSummaries[rt].losses + "</div><div>TotalChampionKills:" + result.playerStatSummaries[rt].aggregatedStats.totalChampionKills + "</div><div>TotalAssists:" + result.playerStatSummaries[rt].aggregatedStats.totalAssists + "</div><div>TotalMinionKills:" + result.playerStatSummaries[rt].aggregatedStats.totalMinionKills + "</div><div>TotalTurretsKilled:" + result.playerStatSummaries[rt].aggregatedStats.totalTurretsKilled + "</div><div>TotalNeutralMinionsKilled:" + result.playerStatSummaries[rt].aggregatedStats.totalNeutralMinionsKilled + "</div>");
+                $("#SeasonStats2013").append("<h2>Season 2013</h2>" + "</div><div><strong>RankedTeam5vs5</strong></div><div>Wins:");
+                if (!result.playerStatSummaries[rs].wins) { $("#SeasonStats2013").append("0"); }
+                else { $("#SeasonStats2013").append(result.playerStatSummaries[rs].wins); }
+                $("#SeasonStats2013").append("</div><div>Loses:");
+                if (!result.playerStatSummaries[rs].losses) { $("#SeasonStats2013").append("0"); }
+                else { $("#SeasonStats2013").append(result.playerStatSummaries[rs].losses); }
+                $("#SeasonStats2013").append("</div><div>TotalChampionKills:");
+                if (!result.playerStatSummaries[rs].aggregatedStats.totalChampionKills) { $("#SeasonStats2013").append("0"); }
+                else { $("#SeasonStats2013").append(result.playerStatSummaries[rs].aggregatedStats.totalChampionKills); }
+                $("#SeasonStats2013").append("</div><div>TotalAssists:");
+                if (!result.playerStatSummaries[rs].aggregatedStats.totalAssists) { $("#SeasonStats2013").append("0"); }
+                else { $("#SeasonStats2013").append(result.playerStatSummaries[rs].aggregatedStats.totalAssists); }
+                $("#SeasonStats2013").append("</div><div>TotalMinionKills:");
+                if (!result.playerStatSummaries[rs].aggregatedStats.totalMinionKills) { $("#SeasonStats2013").append("0"); }
+                else { $("#SeasonStats2013").append(result.playerStatSummaries[rs].aggregatedStats.totalMinionKills); }
+                $("#SeasonStats2013").append("</div><div>TotalTurretsKilled:");
+                if (!result.playerStatSummaries[rs].aggregatedStats.totalTurretsKilled) { $("#SeasonStats2013").append("0"); }
+                else { $("#SeasonStats2013").append(result.playerStatSummaries[rs].aggregatedStats.totalTurretsKilled); }
+                $("#SeasonStats2013").append("</div><div>TotalNeutralMinionsKilled:");
+                if (!result.playerStatSummaries[rs].aggregatedStats.totalNeutralMinionsKilled) { $("#SeasonStats2013").append("0"); }
+                else { $("#SeasonStats2013").append(result.playerStatSummaries[rs].aggregatedStats.totalNeutralMinionsKilled); }
+                    $("#SeasonStats2013").append("</div><div><strong>RankedTeam5vs5</strong></div><div>Wins:");
+                    if (!result.playerStatSummaries[rt].wins) { $("#SeasonStats2013").append("0"); }
+                    else { $("#SeasonStats2013").append(result.playerStatSummaries[rt].wins); }
+                    $("#SeasonStats2013").append("</div><div>Loses:");
+                    if (!result.playerStatSummaries[rt].losses) { $("#SeasonStats2013").append("0"); }
+                    else { $("#SeasonStats2013").append(result.playerStatSummaries[rt].losses); }
+                    $("#SeasonStats2013").append("</div><div>TotalChampionKills:");
+                    if (!result.playerStatSummaries[rt].aggregatedStats.totalChampionKills) { $("#SeasonStats2013").append("0"); }
+                    else { $("#SeasonStats2013").append(result.playerStatSummaries[rt].aggregatedStats.totalChampionKills); }
+                    $("#SeasonStats2013").append("</div><div>TotalAssists:");
+                    if (!result.playerStatSummaries[rt].aggregatedStats.totalAssists) { $("#SeasonStats2013").append("0"); }
+                    else { $("#SeasonStats2013").append(result.playerStatSummaries[rt].aggregatedStats.totalAssists); }
+                    $("#SeasonStats2013").append("</div><div>TotalMinionKills:");
+                    if (!result.playerStatSummaries[rt].aggregatedStats.totalMinionKills) { $("#SeasonStats2013").append("0"); }
+                    else { $("#SeasonStats2013").append(result.playerStatSummaries[rt].aggregatedStats.totalMinionKills); }
+                    $("#SeasonStats2013").append("</div><div>TotalTurretsKilled:");
+                    if (!result.playerStatSummaries[rt].aggregatedStats.totalTurretsKilled) { $("#SeasonStats2013").append("0"); }
+                    else { $("#SeasonStats2013").append(result.playerStatSummaries[rt].aggregatedStats.totalTurretsKilled); }
+                    $("#SeasonStats2013").append("</div><div>TotalNeutralMinionsKilled:");
+                    if (!result.playerStatSummaries[rt].aggregatedStats.totalNeutralMinionsKilled) { $("#SeasonStats2013").append("0"); }
+                    else { $("#SeasonStats2013").append(result.playerStatSummaries[rt].aggregatedStats.totalNeutralMinionsKilled); }
+                    $("#SeasonStats2013").append("</div>");
             },
             error: function (error) {
                 console.log(error);
@@ -148,11 +312,7 @@
 
     }
     function championStats(userId) {
-        var region = $("#region").val();
-        var url = "https://eune.api.pvp.net/championmastery/location/EUN1/player/24491185/champions?api_key=024a9118-11db-4339-af39-1b9e1db3420c&jsoncallback=?";
-        $.getJSON(url, function (json) {
-            debugger;
-        });
+        
     }
 
 
