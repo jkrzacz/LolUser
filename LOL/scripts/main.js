@@ -10,6 +10,7 @@
             success: function (result) {
                 var userId = result[name].id;
                 console.log(userId);
+                getServerStatus(userId);
                 getstatss2016(userId);
                 getstatss2015(userId);
                 getPlayerLeague(userId);
@@ -25,8 +26,31 @@
 
     function getPlayerLeague(userId) {
         var region = $("#region").val();
+        var url = "http://status.leagueoflegends.com/shards/" + region;
+        $.ajax({
+            method: "GET",
+            url: url,
+            success: function (result) {
+                $("#ServerInfo").append("<h3>Servers Status</h3><div><strong>" + result.name + "</strong></div><div>" + result.services[0].name + " : <span id=\"statusGameColor\">" + result.services[0].status + "</span></div>")
+                .append("<div>" + result.services[1].name + " : <span id=\"statusStoreColor\">" + result.services[1].status + "</span></div>")
+                .append("<div>" + result.services[2].name + " : <span id=\"statusWebsiteColor\">" + result.services[2].status + "</span></div>")
+                .append("<div>" + result.services[3].name + " : <span id=\"statusClientColor\">" + result.services[3].status + "</span></div>");
+                if (result.services[0].status === "online") { $("#statusGameColor").css("color", "green"); } else { $("#statusGameColor").css("color", "red") }
+                if (result.services[1].status === "online") { $("#statusStoreColor").css("color", "green"); } else { $("#statusStoreColor").css("color", "red") }
+                if (result.services[2].status === "online") { $("#statusWebsiteColor").css("color", "green"); } else { $("#statusWebsiteColor").css("color", "red") }
+                if (result.services[3].status === "online") { $("#statusClientColor").css("color", "green"); } else { $("#statusClientColor").css("color", "red") }
+                
+                debugger;
+
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        })
+    }
+    function getServerStatus(userId) {
+        var region = $("#region").val();
         var url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v2.5/league/by-summoner/" + userId + "/entry?api_key=024a9118-11db-4339-af39-1b9e1db3420c";
-        console.log(url);
         $.ajax({
             method: "GET",
             url: url,
