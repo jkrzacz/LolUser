@@ -13,7 +13,7 @@
                 getServerStatus(userId);
                 getstatss2016(userId);
                 getstatss2015(userId);
-                getPlayerLeague(userId);
+                getPlayerLeague(userId, $("#inputUserName").val());
                 championStats(userId);
 
             },
@@ -24,7 +24,7 @@
     });
 
 
-    function getPlayerLeague(userId) {
+    function getServerStatus(userId) {
         var region = $("#region").val();
         var url = "http://status.leagueoflegends.com/shards/" + region;
         $.ajax({
@@ -47,7 +47,7 @@
             }
         })
     }
-    function getServerStatus(userId) {
+    function getPlayerLeague(userId, name) {
         var region = $("#region").val();
         var url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v2.5/league/by-summoner/" + userId + "/entry?api_key=024a9118-11db-4339-af39-1b9e1db3420c";
         $.ajax({
@@ -55,7 +55,7 @@
             url: url,
             success: function (result) {
                 var x = result[userId][0];
-                $("#PlayerStats").append("<h3>" + x.queue + "</h3>" + "<div>" + x.tier + " " + x.entries[0].division + " - " + x.entries[0].leaguePoints + "</div><div>" + x.name + "</div><div>Wins:" + x.entries[0].wins + "  Losses:" + x.entries[0].losses + "</div>");
+                $("#PlayerStats").append("<h1>" + name + "</h1><h3>" + x.queue + "</h3>" + "<div>" + x.tier + " " + x.entries[0].division + " - " + x.entries[0].leaguePoints + "</div><div>" + x.name + "</div><div>Wins:" + x.entries[0].wins + "  Losses:" + x.entries[0].losses + "</div>");
 
             },
             error: function (error) {
@@ -333,6 +333,14 @@
         })
 
     }
+    function getChampImage(champName, width, height) {
+        var url = "http://ddragon.leagueoflegends.com/cdn/6.13.1/img/champion/" + champName + ".png";
+        var myImage = new Image(width, height);
+        myImage.src = url;
+        
+        return myImage;
+
+    }
     function championStats(userId) {
         var region = $("#region").val();
         var url = "https://global.api.pvp.net/api/lol/static-data/" + region + "/v1.2/champion?champData=all&api_key=024a9118-11db-4339-af39-1b9e1db3420c";
@@ -365,10 +373,28 @@
         })
     }
     function showRecentGames(userId, champId, RGames) {
-
+        for (var i = 0; i < 10; i++) {
+            var a = "#Game" + i;
+            $( a + " #Image").html(getChampImage(champId[RGames[i].championId], 100, 100));
+            if (RGames[i].stats.win) {
+                $(a + " #Status").html("<td style=\"font-size: 18px; font-weight: bold; color: #99FF44;\">Win</td>")
+                $(a).css("background", "linear-gradient(rgba(75, 255, 55, 0.5), rgba(75, 255, 55, 0.3))");
+            } else {
+                $(a + " #Status").html("<td style=\"font-size: 18px; font-weight: bold; color: #FF99AA;\">Loss</td>");
+                $(a).css("background", "linear-gradient(rgba(255, 55, 75, 0.5), rgba(255, 55, 75, 0.3))");
+            }
+            $(a + " #Name").html("<td>" + RGames[i].subType + "</td>");
+            $(a + " #Stats").html("<td>" + RGames[i].stats.championsKilled + "/" + RGames[i].stats.assists + "/" + RGames[i].stats.numDeaths + "</td>");
+            var KDA = (RGames[i].stats.championsKilled + RGames[i].stats.assists) / RGames[i].stats.numDeaths;
+            $(a + " tbody").append("<tr><td>" + KDA + " KDA</td></tr>");
+            $(a + " tbody").append("<tr><td>" + RGames[i].stats.goldEarned + " Gold</td></tr>");
+            $(a + " tbody").append("<tr><td>" + RGames[i].stats.minionsKilled + " Creeps</td></tr>");
+        }
+        
+        
         debugger;
     }
-
+    $("body").css("background", "rgb(166, 166, 166)");
 
 
 
