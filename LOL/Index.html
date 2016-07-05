@@ -31,39 +31,46 @@
                     <div class="navbar-header">
                         <a class="navbar-brand" href="#">WebSiteName</a>
                     </div>
-                    <div id="search-container">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="myNavbar">
+                        <div id="search-container">
 
-                        <div class="col-xs-3">
-                            <div class="input-group">
-                                <input id="inputUserName" type="text" class="form-control" placeholder="Nick...">
-                                <span class="input-group-addon">
-                                    <select name="action" id="region">
-                                        <option value="eune">EUNE</option>
-                                        <option value="euw">EUW</option>
-                                        <option value="na">NA</option>
-                                        <option value="ru">RU</option>
-                                        <option value="br">BR</option>
-                                        <option value="jp">JP</option>
-                                        <option value="kr">KR</option>
-                                        <option value="lan">LAN</option>
-                                        <option value="las">LAS</option>
-                                        <option value="oce">OCE</option>
-                                        <option value="tr">TR</option>
-                                    </select>
-                                </span>
-                                <span class="input-group-btn">
-                                    <button id="searchButton" class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-                                </span>
-                            </div><!-- /input-group -->
+                            <div class="col-sm-4">
+                                <div class="input-group">
+                                    <input id="inputUserName" type="text" class="form-control" placeholder="Nick...">
+                                    <span class="input-group-addon">
+                                        <select name="action" id="region">
+                                            <option value="eune">EUNE</option>
+                                            <option value="euw">EUW</option>
+                                            <option value="na">NA</option>
+                                            <option value="ru">RU</option>
+                                            <option value="br">BR</option>
+                                            <option value="jp">JP</option>
+                                            <option value="kr">KR</option>
+                                            <option value="lan">LAN</option>
+                                            <option value="las">LAS</option>
+                                            <option value="oce">OCE</option>
+                                            <option value="tr">TR</option>
+                                        </select>
+                                    </span>
+                                    <span class="input-group-btn">
+                                        <button id="searchButton" class="btn btn-default" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                    </span>
+                                </div><!-- /input-group -->
+                            </div>
+
                         </div>
-
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Page 1</a></li>
+                            <li><a href="#">Page 2</a></li>
+                        </ul>
+                        </div>
                     </div>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Page 1</a></li>
-                        <li><a href="#">Page 2</a></li>
-                    </ul>
-                </div>
             </nav>
             <div class="row">
                 <div class="col-xs-6 col-sm-4 col-md-3" id="PlayerStats">

@@ -40,7 +40,6 @@
                 if (result.services[2].status === "online") { $("#statusWebsiteColor").css("color", "green"); } else { $("#statusWebsiteColor").css("color", "red") }
                 if (result.services[3].status === "online") { $("#statusClientColor").css("color", "green"); } else { $("#statusClientColor").css("color", "red") }
                 
-                debugger;
 
             },
             error: function (error) {
@@ -57,7 +56,6 @@
             success: function (result) {
                 var x = result[userId][0];
                 $("#PlayerStats").append("<h3>" + x.queue + "</h3>" + "<div>" + x.tier + " " + x.entries[0].division + " - " + x.entries[0].leaguePoints + "</div><div>" + x.name + "</div><div>Wins:" + x.entries[0].wins + "  Losses:" + x.entries[0].losses + "</div>");
-                debugger;
 
             },
             error: function (error) {
@@ -336,8 +334,41 @@
 
     }
     function championStats(userId) {
-        
+        var region = $("#region").val();
+        var url = "https://global.api.pvp.net/api/lol/static-data/" + region + "/v1.2/champion?champData=all&api_key=024a9118-11db-4339-af39-1b9e1db3420c";
+        $.ajax({
+            method: "GET",
+            url: url,
+            success: function (result) {
+                var champId = result.keys;
+                getRecentGames(userId, champId);
+
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        })
     }
+    function getRecentGames(userId,champId) {
+        var region = $("#region").val();
+            var url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.3/game/by-summoner/" + userId + "/recent?api_key=024a9118-11db-4339-af39-1b9e1db3420c";
+        $.ajax({
+            method: "GET",
+            url: url,
+            success: function (result) {
+                var RGames = result.games;
+                showRecentGames(userId, champId, RGames);
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        })
+    }
+    function showRecentGames(userId, champId, RGames) {
+
+        debugger;
+    }
+
 
 
 
