@@ -1,0 +1,23 @@
+﻿body {
+        color: #fff;
+        background-color: #333;
+        padding-top: 67px;
+}
+#main-container {
+    visibility: hidden;
+}
+#search-container{
+    padding-top: 7px;
+}
+.constyle{
+    background-color: #292929; 
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, color-stop(0, #292929),  color-stop(1.0, #191919)); 
+    background: -webkit-linear-gradient(center top, #292929 0%, #191919 100%); 
+    background: -moz-linear-gradient(center top, #292929 0%, #191919 100%); 
+    background: -ms-linear-gradient(center top, #292929 0%, #191919 100%); 
+    background: -o-linear-gradient(center top, #292929 0%, #191919 100%); 
+    padding: 10px 0;
+}
+.Games{
+    padding: 10px;
+}

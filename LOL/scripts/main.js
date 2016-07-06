@@ -1,20 +1,21 @@
 ﻿$(function () {
-    
+    var apiKeyParameters = "api_key=024a9118-11db-4339-af39-1b9e1db3420c";
+    var region = "";
+    var name = "";
     $("#searchButton").click(function () {
-        var apiKeyParameters = "?api_key=024a9118-11db-4339-af39-1b9e1db3420c";
-        var region = $("#region").val();
-        var name = $("#inputUserName").val().toLowerCase();
-        var url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.4/summoner/by-name/" + name + apiKeyParameters;
+        region = $("#region").val();
+        name = $("#inputUserName").val();
+        var url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.4/summoner/by-name/" + name.toLowerCase() + "?" + apiKeyParameters;
         $.ajax({
             method: "GET",
             url: url,
             success: function (result) {
-                var userId = result[name].id;
+                var userId = result[name.toLowerCase()].id;
                 console.log(userId);
                 getServerStatus(userId);
                 getstatss2016(userId);
                 getstatss2015(userId);
-                getPlayerLeague(userId, $("#inputUserName").val());
+                getPlayerLeague(userId);
                 championStats(userId);
 
             },
@@ -27,12 +28,12 @@
     
     function getServerStatus(userId) {
         $("#ServerInfo").empty();
-        var region = $("#region").val();
         var url = "http://status.leagueoflegends.com/shards/" + region;
         $.ajax({
             method: "GET",
             url: url,
             success: function (result) {
+                $("#main-container").css("visibility", "visible");
                 $("#ServerInfo").append("<h3>Servers Status</h3><div><strong>" + result.name + "</strong></div><div>" + result.services[0].name + " : <span id=\"statusGameColor\">" + result.services[0].status + "</span></div>")
                 .append("<div>" + result.services[1].name + " : <span id=\"statusStoreColor\">" + result.services[1].status + "</span></div>")
                 .append("<div>" + result.services[2].name + " : <span id=\"statusWebsiteColor\">" + result.services[2].status + "</span></div>")
@@ -49,10 +50,9 @@
             }
         })
     }
-    function getPlayerLeague(userId, name) {
+    function getPlayerLeague(userId) {
         $("#PlayerStats").empty();
-        var region = $("#region").val();
-        var url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v2.5/league/by-summoner/" + userId + "/entry?api_key=024a9118-11db-4339-af39-1b9e1db3420c";
+        var url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v2.5/league/by-summoner/" + userId + "/entry?" + apiKeyParameters;
         $.ajax({
             method: "GET",
             url: url,
@@ -69,8 +69,7 @@
 
     function getstatss2016(userId) {
         $("#SeasonStats2016").empty();
-        var region = $("#region").val();
-        var url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.3/stats/by-summoner/" + userId + "/summary?season=SEASON2016&api_key=024a9118-11db-4339-af39-1b9e1db3420c";
+        var url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.3/stats/by-summoner/" + userId + "/summary?season=SEASON2016&" + apiKeyParameters;
         $.ajax({
             method: "GET",
             url: url,
@@ -138,8 +137,7 @@
     }
     function getstatss2015(userId) {
         $("#SeasonStats2015").empty();
-        var region = $("#region").val();
-        var url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.3/stats/by-summoner/" + userId + "/summary?season=SEASON2015&api_key=024a9118-11db-4339-af39-1b9e1db3420c";
+        var url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.3/stats/by-summoner/" + userId + "/summary?season=SEASON2015&" + apiKeyParameters;
         $.ajax({
             method: "GET",
             url: url,
@@ -207,8 +205,7 @@
     }
     function getstatss2014(userId) {
         $("#SeasonStats2014").empty();
-        var region = $("#region").val();
-        var url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.3/stats/by-summoner/" + userId + "/summary?season=SEASON2014&api_key=024a9118-11db-4339-af39-1b9e1db3420c";
+        var url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.3/stats/by-summoner/" + userId + "/summary?season=SEASON2014&" + apiKeyParameters;
         $.ajax({
             method: "GET",
             url: url,
@@ -275,8 +272,7 @@
     }
     function getstatss2013(userId) {
         $("#SeasonStats2013").empty();
-        var region = $("#region").val();
-        var url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.3/stats/by-summoner/" + userId + "/summary?season=SEASON3&api_key=024a9118-11db-4339-af39-1b9e1db3420c";
+        var url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.3/stats/by-summoner/" + userId + "/summary?season=SEASON3&" + apiKeyParameters;
         $.ajax({
             method: "GET",
             url: url,
@@ -409,8 +405,7 @@
 
     }
     function championStats(userId) {
-        var region = $("#region").val();
-        var url = "https://global.api.pvp.net/api/lol/static-data/" + region + "/v1.2/champion?champData=all&api_key=024a9118-11db-4339-af39-1b9e1db3420c";
+        var url = "https://global.api.pvp.net/api/lol/static-data/" + region + "/v1.2/champion?champData=all&" + apiKeyParameters;
         $.ajax({
             method: "GET",
             url: url,
@@ -425,8 +420,7 @@
         })
     }
     function getRecentGames(userId,champId) {
-        var region = $("#region").val();
-            var url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.3/game/by-summoner/" + userId + "/recent?api_key=024a9118-11db-4339-af39-1b9e1db3420c";
+        var url = "https://" + region + ".api.pvp.net/api/lol/" + region + "/v1.3/game/by-summoner/" + userId + "/recent?" + apiKeyParameters;
         $.ajax({
             method: "GET",
             url: url,
@@ -455,7 +449,7 @@
             $(a + " #Name").html("<td>" + RGames[i].subType + "</td>");
             $(a + " #Stats").html("<td>" + RGames[i].stats.championsKilled + "/" + RGames[i].stats.assists + "/" + RGames[i].stats.numDeaths + "</td>");
             var KDA = (RGames[i].stats.championsKilled + RGames[i].stats.assists) / RGames[i].stats.numDeaths;
-            $(a + " #KDA").html("<td>" + KDA + " KDA</td>");
+            $(a + " #KDA").html("<td>" + KDA.toFixed(2) + " KDA</td>");
             $(a + " #Gold").html("<td>" + RGames[i].stats.goldEarned + " Gold</td>");
             $(a + " #Creeps").html("<td>" + RGames[i].stats.minionsKilled + " Creeps</td>");
             $(a + " #Spell1").empty();
@@ -485,9 +479,9 @@
         }
         
         
-        debugger;
+
     }
-    $("body").css("background", "rgb(166, 166, 166)");
+    
 
 
 
